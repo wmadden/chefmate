@@ -4,6 +4,7 @@ class MenusController < ApplicationController
   end
   
   def new
+    @menu = Menu.new
   end
   
 end
