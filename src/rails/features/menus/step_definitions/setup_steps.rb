@@ -1,5 +1,5 @@
 Given /^I am looking at the existing menus screen$/ do
-  pending
+  visit '/menus'
 end
 
 Given /^I am looking at some existing menus$/ do

@@ -1,4 +1,4 @@
-@menu
+@menu @wip
 Feature: Create a new dish and add it to a menu
   As a user
   I want to be able to add dishes to my menu that aren't known by the system

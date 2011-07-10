@@ -7,7 +7,7 @@ Feature: Managing menus
   
   Scenario: Create a menu
     Given I am looking at the existing menus screen
-    When I click the "new menu" link
+    When I click the "New Menu" link
       And I enter a name for the new menu
     Then I should see a new, empty menu
       And it should have the name I entered

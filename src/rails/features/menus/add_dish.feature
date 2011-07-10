@@ -1,4 +1,4 @@
-@menu
+@menu @wip
 Feature: Add a dish to a menu
   As a user
   I want my menu to contain dishes I like

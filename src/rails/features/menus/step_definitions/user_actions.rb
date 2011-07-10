@@ -2,8 +2,8 @@ When /^I click the "([^"]*)" button$/ do |arg1|
   pending # express the regexp above with the code you wish you had
 end
 
-When /^I click the "([^"]*)" link$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+When /^I click the "([^"]*)" link$/ do |link_text|
+  click_link( link_text )
 end
 
 When /^I type in the name of a dish$/ do
