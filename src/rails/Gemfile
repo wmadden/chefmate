@@ -11,10 +11,11 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'cucumber-rails'
   gem 'database_cleaner'
+  gem 'rcov'
   gem 'ZenTest'
   gem 'autotest-rails'
   gem 'autotest-growl'
-  gem 'rcov'
+  gem 'autotest-fsevent'
 end
 
 # Use unicorn as the web server
