@@ -7,6 +7,10 @@ gem 'rails'
 
 gem 'sqlite3'
 
+group :development do
+  gem 'grit' # Code formatting
+end
+
 group :development, :test do
   gem 'formtastic'
   

@@ -6,27 +6,34 @@ Feature: Managing menus
   And buy the ingredients I will require in one go
   
   Scenario: Create a menu
-    Given I am looking at the existing menus screen
+    Given I am on the existing menus screen
     When I click the "New Menu" link
-      And I enter a name for the new menu
-    Then I should see a new, empty menu
-      And it should have the name I entered
-  
+      And I enter:
+        | input | value     |
+        | Name  | Some Menu |
+      And I click the "Create Menu" button
+    Then I should see the message "Menu created"
+      And I should see "Some Menu"
+    
+  @wip
   Scenario: Remove a dish from a menu
     Given I am looking at a menu
     When I click the "remove" button on a dish
     Then I should no longer see the dish
   
+  @wip
   Scenario: View a dish from a menu
     Given I am looking at a menu
     When I click on a dish's name
     Then I should be taken to look at the dish
 
+  @wip
   Scenario: Delete a menu
     Given I am looking at some existing menus
     When I click the "remove" button on a menu
     Then I should no longer see the menu
   
+  @wip
   Scenario: Change the properties of a menu
     Given I am looking at a menu
     When I click the "edit" link

@@ -43,13 +43,21 @@ describe MenusController do
     describe 'when the Menu is valid' do
       let(:menu_valid) { true }
       
+      before :each do
+        menu.stub(:save!)
+      end
+      
       it 'should create the Menu' do
         menu.should_receive 'save!'
         post 'create'
       end
       
+      it 'should create a flash message' do
+        post 'create'
+        flash[:success].should == "Menu created"
+      end
+      
       it 'should redirect to #show' do
-        menu.stub(:save!)
         post 'create'
         response.should redirect_to( menu_path(menu) )
       end

@@ -11,6 +11,7 @@ class MenusController < ApplicationController
     @menu = Menu.new( params['menu'] )
     if @menu.valid?
       @menu.save!
+      flash[:success] = "Menu created"
       redirect_to menu_path(@menu)
     else
       render 'new'
