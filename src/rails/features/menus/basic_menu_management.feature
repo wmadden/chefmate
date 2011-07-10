@@ -13,32 +13,34 @@ Feature: Managing menus
         | Name  | Some Menu |
       And I click the "Create Menu" button
     Then I should see the message "Menu created"
-      And I should see "Some Menu"
+      And I should see the heading "Some Menu"
+  
+  Scenario: View existing menus
+    Given the following menus exist:
+      | name            |
+      | Some Menu       |
+      | Some Other Menu |
+    When I go to the existing menus screen
+    Then I should see the names of all existing menus
     
-  @wip
-  Scenario: Remove a dish from a menu
-    Given I am looking at a menu
-    When I click the "remove" button on a dish
-    Then I should no longer see the dish
+  Scenario: View a menu
+    Given the following menus exist:
+      | name            |
+      | Some Menu       |
+      | Some Other Menu |
+    And I am on the existing menus screen
+    When I click the "Some Menu" link
+    Then I should see the heading "Some Menu"
   
-  @wip
-  Scenario: View a dish from a menu
-    Given I am looking at a menu
-    When I click on a dish's name
-    Then I should be taken to look at the dish
-
-  @wip
-  Scenario: Delete a menu
-    Given I am looking at some existing menus
-    When I click the "remove" button on a menu
-    Then I should no longer see the menu
-  
-  @wip
   Scenario: Change the properties of a menu
-    Given I am looking at a menu
-    When I click the "edit" link
-      And I enter a new name for the menu
-      And I click the "save changes" button
-    Then I should be taken to look at the menu
-      And it should have the new name I entered
-  
+    Given the following menu exists:
+      | name            |
+      | Some Menu       |
+    And I am on the menu show screen
+    When I click the "Edit Menu" link
+      And I enter:
+        | input       | value              |
+        | menu[name]  | Some New Menu Name |
+      And I click the "Update Menu" button
+    Then I should see the message "Menu updated"
+      And I should see the heading "Some New Menu Name"

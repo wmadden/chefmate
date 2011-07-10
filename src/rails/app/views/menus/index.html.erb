@@ -1,1 +1,19 @@
 <%= link_to "New Menu", new_menu_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tfoot></tfoot>
+  <tbody>
+    <% @menus.each do |menu| %>
+      <tr>
+        <td>
+          <%= link_to menu.name, menu_path( menu ) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

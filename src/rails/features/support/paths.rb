@@ -13,7 +13,10 @@ module NavigationHelpers
     
     when /^the existing menus screen$/
       menus_path
-      
+    
+    when /^the menu show screen$/
+      menu_path( @menu )
+    
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
