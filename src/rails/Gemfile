@@ -8,10 +8,15 @@ gem 'rails'
 gem 'sqlite3'
 
 group :development, :test do
+  gem 'formtastic'
+  
+  # Testing
   gem 'rspec-rails'
   gem 'cucumber-rails'
   gem 'database_cleaner'
   gem 'rcov'
+  
+  # Autotest
   gem 'ZenTest'
   gem 'autotest-rails'
   gem 'autotest-growl'
