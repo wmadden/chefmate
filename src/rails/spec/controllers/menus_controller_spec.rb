@@ -22,7 +22,7 @@ describe MenusController do
   
   describe '#create' do
     let(:menu_valid) { false }
-    let(:menu) { mock(:menu, :valid? => menu_valid ) }
+    let(:menu) { mock(:menu, :save! => menu_valid ) }
     
     before :each do
       Menu.stub(:new).and_return(menu)
@@ -33,13 +33,12 @@ describe MenusController do
       post 'create', { 'menu' => { 'name' => 'Some Menu' } }
     end
     
-    it "should check that the menu is valid" do
-      Menu.stub(:new).and_return(menu)
-      menu.should_receive(:valid?)
+    it "should save! the menu" do
+      menu.should_receive(:save!)
       post 'create'
     end
     
-    describe 'when the Menu is invalid' do
+    describe 'when the Menu cannot be saved' do
       let(:menu_valid) { false }
       
       it 'it should render #new' do
@@ -53,17 +52,8 @@ describe MenusController do
       end
     end
     
-    describe 'when the Menu is valid' do
+    describe 'when the Menu saves successfully' do
       let(:menu_valid) { true }
-      
-      before :each do
-        menu.stub(:save!)
-      end
-      
-      it 'should create the Menu' do
-        menu.should_receive 'save!'
-        post 'create'
-      end
       
       it 'should create a flash message' do
         post 'create'
@@ -111,7 +101,7 @@ describe MenusController do
   
   describe '#update' do
     let(:menu_valid) { false }
-    let(:menu) { mock(:menu, :valid? => menu_valid, :update_attributes => nil ) }
+    let(:menu) { mock(:menu, :update_attributes => menu_valid ) }
     
     before :each do
       Menu.stub(:find).and_return(menu)
@@ -127,13 +117,7 @@ describe MenusController do
       put 'update', { 'id' => 'menu-ID', 'menu' => { 'name' => 'Some Menu' } }
     end
     
-    it "should check that the menu is valid" do
-      Menu.stub(:new).and_return(menu)
-      menu.should_receive(:valid?)
-      put 'update', 'id' => 'menu-ID'
-    end
-    
-    describe 'when the Menu is invalid' do
+    describe 'when the Menu cannot be updated' do
       let(:menu_valid) { false }
       
       it 'it should render #edit' do
@@ -147,16 +131,11 @@ describe MenusController do
       end
     end
     
-    describe 'when the Menu is valid' do
+    describe 'when the Menu updates successfully' do
       let(:menu_valid) { true }
       
       before :each do
         menu.stub(:save!)
-      end
-      
-      it 'should save the Menu' do
-        menu.should_receive 'save!'
-        put 'update', 'id' => 'menu-ID'
       end
       
       it 'should create a flash message' do

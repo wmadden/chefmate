@@ -10,8 +10,8 @@ class MenusController < ApplicationController
   
   def create
     @menu = Menu.new( params['menu'] )
-    if @menu.valid?
-      @menu.save!
+    
+    if @menu.save!
       flash[:success] = "Menu created"
       redirect_to menu_path(@menu)
     else
@@ -30,10 +30,8 @@ class MenusController < ApplicationController
   
   def update
     @menu = Menu.find( params['id'] )
-    @menu.update_attributes( params['menu'] )
     
-    if @menu.valid?
-      @menu.save!
+    if @menu.update_attributes( params['menu'] )
       flash[:success] = "Menu updated"
       redirect_to menu_path(@menu)
     else
