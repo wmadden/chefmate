@@ -1,0 +1,34 @@
+User goals:
+ - Eat healthily, within budget, etc.
+ - Know in advance what meals to prepare, buy ingredients for etc.
+
+ - Plan meals
+ - Generate menu that satisfies constraints
+ - Generate shopping list for menu
+
+Flows:
+ - Plan Meals
+   - Goal: plan out the meals for the day, or week
+   - Available actions:
+     - Define period
+     - Add meals to days within period
+ 
+Domain:
+ - Recipe
+   ---
+   - Name
+   - Ingredients
+   - Instructions
+   - Preparation time?
+ - Menu Item (something to eat)
+   - May have a recipe
+   ---
+   - Name
+   - Ingredients?
+ - Menu: collection of menu items for a given period (week, day etc.)
+   - Has many menu items
+   - Has many constraints?
+   ---
+   - Name
+   - Period?
+ 
