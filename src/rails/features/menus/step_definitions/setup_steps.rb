@@ -12,3 +12,7 @@ end
 Given /^the following menu exists:$/ do |table|
   @menu = Menu.create!( table.hashes.first )
 end
+
+Given /^the following dish exists:$/ do |table|
+  @dish = Dish.create!( table.hashes.first )
+end

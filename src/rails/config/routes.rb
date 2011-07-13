@@ -1,6 +1,8 @@
 Meals::Application.routes.draw do
   
-  resources :menus
+  resources :menus do
+    resources :items, :controller => "menus/menu_items"
+  end
 #  root :to => "menus#index"
   
   # The priority is based upon order of creation:
