@@ -11,3 +11,7 @@ When /^I enter:$/ do |input_table|
     fill_in( hash['input'], :with => hash['value'] )
   end
 end
+
+When /^I choose the ([a-zA-Z_]+) "([^"]+)"$/ do |input_name, value|
+  select value, :from => input_name
+end

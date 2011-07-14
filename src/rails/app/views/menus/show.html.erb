@@ -1,4 +1,22 @@
 <h2><%= @menu.name %></h2>
 
+<table>
+  <thead>
+    <tr>
+      <th>Dish</th>
+    </tr>
+  </thead>
+  <tfoot></tfoot>
+  <tbody>
+    <% @menu.items.each do |item| %>
+      <tr>
+        <td>
+          <%= item.dish.name %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to 'Edit Menu', edit_menu_path(@menu) %>
 <%= link_to 'New Item', new_menu_item_path(@menu) %>
