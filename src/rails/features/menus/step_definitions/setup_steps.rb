@@ -1,4 +1,4 @@
-Given /^I am on xthe existing menus screen$/ do
+Given /^I am on the existing menus screen$/ do
   visit '/menus'
 end
 
