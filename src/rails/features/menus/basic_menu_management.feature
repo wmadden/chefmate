@@ -8,7 +8,15 @@ Feature: Managing menus
   Scenario: Navigate to menus screen
     Given I am on the root page
     When I click the "Menus" link
-    Then I should be on the existing menus screen
+    Then I should see the heading "Menus"
+
+  Scenario: View existing menus
+    Given the following menus exist:
+      | name            |
+      | Some Menu       |
+      | Some Other Menu |
+    When I go to the existing menus screen
+    Then I should see the names of all existing menus
 
   Scenario: Create a menu
     Given I am on the existing menus screen
@@ -19,14 +27,6 @@ Feature: Managing menus
       And I click the "Create Menu" button
     Then I should see the message "Menu created"
       And I should see the heading "Some Menu"
-
-  Scenario: View existing menus
-    Given the following menus exist:
-      | name            |
-      | Some Menu       |
-      | Some Other Menu |
-    When I go to the existing menus screen
-    Then I should see the names of all existing menus
 
   Scenario: View a menu
     Given the following menus exist:

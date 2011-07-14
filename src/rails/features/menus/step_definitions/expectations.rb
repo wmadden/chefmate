@@ -15,3 +15,9 @@ Then /^I should see the heading "([^"]+)"$/ do |heading|
     page.should have_content( heading )
   end
 end
+
+Then /^I should see the names of all existing dishes$/ do
+  @dishes.each do |dish|
+    page.should have_content(dish.name)
+  end
+end

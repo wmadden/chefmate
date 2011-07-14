@@ -10,13 +10,19 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       '/'
-    
+
     when /^the existing menus screen$/
       menus_path
-    
+
     when /^the menu show screen$/
       menu_path( @menu )
-    
+
+    when /^the existing dishes screen$/
+      dishes_path
+
+    when /^the dish show screen$/
+      dish_path( @dish )
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

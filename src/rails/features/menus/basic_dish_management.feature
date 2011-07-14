@@ -6,7 +6,15 @@ Feature: Basic Dish Management
   Scenario: Navigate to the dishes screen
     Given I am on the root page
     When I click the "Dishes" link
-    Then I should be on the existing dishes screen
+    Then I should see the heading "Dishes"
+
+  Scenario: View existing dishes
+    Given the following dishes exist:
+      | name            |
+      | Some Dish       |
+      | Some Other Dish |
+    When I go to the existing dishes screen
+    Then I should see the names of all existing dishes
 
   Scenario: Create a Dish
     Given I am on the existing dishes screen
