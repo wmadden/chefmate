@@ -3,3 +3,7 @@ db/*.sqlite3
 log/*.log
 tmp/
 .idea/
+src/rails/db/development.sqlite3
+src/rails/log/development.log
+src/rails/log/test.log
+src/rails/db/test.sqlite3
