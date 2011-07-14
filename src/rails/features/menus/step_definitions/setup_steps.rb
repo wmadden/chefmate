@@ -1,7 +1,3 @@
-Given /^I am on the existing menus screen$/ do
-  visit '/menus'
-end
-
 Given /^the following menus exist:$/ do |table|
   @menus = []
   table.hashes.each do |hash|
