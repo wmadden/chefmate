@@ -6,6 +6,7 @@ gem 'rails'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+gem 'compass'
 
 group :development do
   gem 'grit' # Code formatting
@@ -13,13 +14,13 @@ end
 
 group :development, :test do
   gem 'formtastic'
-  
+
   # Testing
   gem 'rspec-rails'
   gem 'cucumber-rails'
   gem 'database_cleaner'
   gem 'rcov'
-  
+
   # Autotest
   gem 'ZenTest'
   gem 'autotest-rails'

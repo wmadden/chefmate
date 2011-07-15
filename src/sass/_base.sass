@@ -1,0 +1,135 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Base structure of the page: layout, backgrounds, colours etc.
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@import "compass/css3"
+@import "compass/typography/lists/inline-block-list"
+@import "compass/utilities/general/clearfix"
+
+body
+  background:
+    color:              #1e69a9
+  font-family:          "Ubuntu", "Bitstream Vera Sans", "Liberation Sans", "Verdana", "Arial", "Sans"
+
+#doc
+  width:                960px
+  margin:               0 auto
+
+#hd, #bd
+  margin:
+    bottom:             8px
+    top:                8px
+  font-size:            12px
+  border:               1px solid #1a5c94
+  +border-radius( 8px )
+
+#hd
+  background:
+    image:              image-url( "hd_bg.png" )
+    color:              #6199c8
+  color:                #FFFFFF
+  height:               42px
+  font-size:            8pt
+
+#site-title, #primary-nav, #user-info
+  float:                left
+  line-height:          42px
+  text-decoration:      none
+
+#site-title
+  color:                #FFFFFF
+  font-size:            12px
+  font-weight:          bold
+  width:                165px
+  text-align:           center
+  border:
+    right:              1px solid #5688b2
+  @include text-shadow( rgba(0, 59, 119, 0.90) 0 0 5px )
+
+#primary-nav
+  .item
+    float:              left
+    border:
+      right:            1px solid #5688b2
+
+    &.current
+      background:       image-url( "primary-nav-current-item_bg.png" )
+      @include text-shadow( rgba(0, 59, 119, 1) 0 0 5px )
+
+      a
+        background:
+          image:        image-url( "primary-nav-current-item-tick.png" )
+          position:     bottom center
+          repeat:       no-repeat
+
+  a
+    padding:            0 16px
+    text-decoration:    none
+    display:            block
+    color:              inherit
+
+#user-info
+
+#bd
+  background:
+    color:              #FFFFFF
+  color:                #333333
+  min-height:           500px
+
+  .content
+    padding:            16px
+
+  .page-header
+    +clearfix
+    margin-bottom:      1.0em
+    line-height:        32px
+
+    .title
+      float:            left
+
+    *
+      margin-bottom:    0
+
+    .actions
+      float:            right
+
+#secondary-nav
+  background:
+    color:              #EFEFEF
+    image:              image-url( "secondary-nav_bg.png" )
+  height:               23px
+  border:
+    bottom:             1px solid #d0d0d0
+  @include border-top-left-radius( 8px )
+  @include border-top-right-radius( 8px )
+  font-size:            10px
+  color:                #767676
+  line-height:          23px
+  padding:
+    left:               12px
+  text-transform:       capitalize
+
+  .breadcrumbs
+    +horizontal-list-container
+    @include text-shadow( #FFFFFF -1px -1px 1px )
+
+    .breadcrumb
+      +horizontal-list-item
+      display:          list-item
+      list-style-position: inside
+      list-style-image:   image-url( "breadcrumb-separator.png" )
+
+      &:first-child
+        padding-left:   0
+        display:        inline
+
+    a
+      text-decoration:  none
+      color:            inherit
+
+#ft
+  color:                #FFFFFF
+  font-size:            10px
+  opacity:              0.65

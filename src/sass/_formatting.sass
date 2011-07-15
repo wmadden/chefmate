@@ -1,0 +1,69 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Formatting styles for general content.
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@import "compass/utilities/tables/scaffolding"
+
+.content
+  line-height:          1.5em
+
+  table
+    @include table-scaffolding
+    width:              100%
+    border-collapse:    collapse
+
+  th
+    font-size:          11px
+
+  td, th
+    border:             1px solid #C9C9C9
+    
+
+  #{elements-of-type("block")}
+    margin-bottom:      0.5em
+
+  h2, h3, h4, h5, h6
+    margin-bottom:      1.0em
+    color:              #333333
+
+  // TODO: choose better font for headings
+  h2
+    font-size:          12px
+    font-weight:        bold
+
+  h3
+    font-size:          12px
+    font-weight:        bold
+    font-style:         italic
+
+  h4
+    font-style:         italic
+
+  a
+    color:              #323232
+    padding:            4px
+
+    &:focus
+      outline:          1px dotted #666
+
+    &:hover
+      color:            #000000
+      background-color: #EFEFEF
+
+    &:visited
+      color:            #666666
+  
+  .progress-bar
+    margin:             0
+    position:           relative
+    height:             18px
+    
+    .label
+      position:         absolute
+      width:            100%
+      height:           100%
+      text-align:       center
+      line-height:      16px
+      font-size:        0.8em

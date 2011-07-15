@@ -1,0 +1,32 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  Applies icons to things.
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@import "compass/typography/text/replacement"
+
+a.icon, .content a.icon
+  padding-left:         24px
+
+  &.no-text
+    +hide-text
+    display:            block
+    padding-left:       20px
+
+.icon
+  background:
+    repeat:             no-repeat
+    position:           4px 50%
+
+  &.add, &.new
+    background-image:   image-url( "icons/add.png" )
+
+  &.delete, &.destroy
+    background-image:   image-url( "icons/cross.png" )
+
+  &.edit
+    background-image:   image-url( "icons/pencil.png" )
+
+  &.back
+    background-image:   image-url( "icons/arrow_left.png" )

@@ -7,3 +7,5 @@ src/rails/db/development.sqlite3
 src/rails/log/development.log
 src/rails/log/test.log
 src/rails/db/test.sqlite3
+*/**/.sass-cache/
+*.css

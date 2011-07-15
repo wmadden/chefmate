@@ -1,0 +1,21 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Renders the user's available actions as a floating horizontal list, with positive actions on the right and negative
+// actions on the left.
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@import "compass/typography/lists/horizontal-list"
+
+.actions, .content .actions
+  +horizontal-list-container
+  margin-bottom:        0
+
+  .action
+    +horizontal-list-item
+
+    &.positive
+      float:            right
+
+    &.negative
+      float:            left

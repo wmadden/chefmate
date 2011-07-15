@@ -1,0 +1,22 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Renders an element as a pushable button.
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@import "compass/css3"
+@import "compass/css3/box-shadow"
+
+.button
+  +border-radius( 4px )
+  border:               1px solid #95979A
+  background:
+    color:              #EDEDED
+    image:              image-url( "button_bg.png" )
+    background-repeat:  repeat-x
+  @include text-shadow( rgba(255,255,255, 0.90) 1px 1px 1px )
+  font-size:            90%
+  +box-shadow( rgba(0,0,0, 0.1) 1px 1px 2px )
+
+a.button
+  text-decoration:      none

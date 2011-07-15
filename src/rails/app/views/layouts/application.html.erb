@@ -3,6 +3,7 @@
 <head>
   <title>Meals</title>
 
+  <%= stylesheet_link_tag 'screen', :media => 'screen' %>
   <%= stylesheet_link_tag 'formtastic', 'formtastic_changes' %>
   <!--[if IE 6]><%= stylesheet_link_tag 'formtastic_ie6' %><![endif]-->
   <!--[if IE 7]><%= stylesheet_link_tag 'formtastic_ie7' %><![endif]-->
@@ -17,7 +18,7 @@
 <div id="doc">
 
   <div id="hd">
-    <ul class="primary nav">
+    <ul id="primary-nav">
       <li class="item">
         <%= link_to "Menus", menus_path %>
       </li>
@@ -38,7 +39,9 @@
       </ul>
     <% end %>
 
-    <%= yield %>
+    <div class="content">
+      <%= yield %>
+    </div>
   </div>
 
   <div id="ft"></div>
