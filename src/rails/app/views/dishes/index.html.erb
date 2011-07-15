@@ -1,6 +1,6 @@
-<h2>Menus</h2>
+<h2>Dishes</h2>
 
-<%= link_to "New Menu", new_menu_path %>
+<%= link_to "New Dish", new_dish_path %>
 
 <table>
   <thead>
@@ -10,12 +10,12 @@
   </thead>
   <tfoot></tfoot>
   <tbody>
-    <% @menus.each do |menu| %>
+    <% @dishes.each do |dish| %>
       <tr>
         <td>
-          <%= link_to menu.name, menu_path( menu ) %>
+          <%= link_to dish.name, dish_path(dish) %>
         </td>
       </tr>
-    <% end %>
+    <% end  %>
   </tbody>
 </table>

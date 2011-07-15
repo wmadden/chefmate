@@ -205,7 +205,3 @@ Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
     assert_equal expected_params, actual_params
   end
 end
-
-Then /^I should see an? ([a-zA-Z]+) message$/ do |message_type|
-  page.should have_css("#flash #{message_type}.type")
-end

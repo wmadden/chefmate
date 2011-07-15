@@ -21,3 +21,7 @@ Then /^I should see the names of all existing dishes$/ do
     page.should have_content(dish.name)
   end
 end
+
+Then /^I should see an? ([a-zA-Z]+) message$/ do |message_type|
+  page.should have_css("#flash-messages .#{message_type}.message")
+end

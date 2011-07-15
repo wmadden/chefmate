@@ -21,10 +21,10 @@ Feature: Basic Dish Management
     When I click the "New Dish" link
       And I enter:
         | input | value     |
-        | name  | Some Dish |
+        | Name  | Some Dish |
       And I click the "Create Dish" button
-    Then I should be on the existing dishes screen
-      And I should see "Some Dish"
+    Then I should see a success message
+      And I should see the heading "Some Dish"
 
   Scenario: View a Dish
     Given the following dish exists:
@@ -43,7 +43,7 @@ Feature: Basic Dish Management
       And I enter:
         | input       | value              |
         | Name        | Some New Dish Name |
-      And I click the "Update Menu" button
+      And I click the "Update Dish" button
     Then I should see a success message
       And I should see the heading "Some New Dish Name"
 
