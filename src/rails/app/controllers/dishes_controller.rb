@@ -1,5 +1,7 @@
 class DishesController < ApplicationController
 
+  before_filter { |c| c.current_tab = :dishes }
+
   def index
     @dishes = Dish.find :all
   end

@@ -1,5 +1,7 @@
 class MenusController < ApplicationController
 
+  before_filter { |c| c.current_tab = :menus }
+
   def index
     @menus = Menu.find :all
   end

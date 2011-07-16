@@ -19,10 +19,10 @@
 
   <div id="hd">
     <ul id="primary-nav">
-      <li class="item">
+      <li class="<%= current_tab?(:menus) %> item">
         <%= link_to "Menus", menus_path %>
       </li>
-      <li class="item">
+      <li class="<%= current_tab?(:dishes) %> item">
         <%= link_to "Dishes", dishes_path %>
       </li>
     </ul>
