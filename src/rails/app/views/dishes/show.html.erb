@@ -1,3 +1,28 @@
 <h2><%= @dish.name %></h2>
 
-<%= link_to 'Edit Dish', edit_dish_path(@dish) %>
+<ul class="actions">
+  <li class="action">
+    <%= link_to 'Add Ingredient', new_dish_ingredient_path(@dish) %>
+  </li>
+  <li class="action">
+    <%= link_to 'Edit Dish', edit_dish_path(@dish) %>
+  </li>
+</ul>
+
+<h3>Ingredients</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tfoot></tfoot>
+  <tbody>
+    <% @dish.ingredients.each do |ingredient| %>
+      <tr>
+        <td><%= ingredient.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

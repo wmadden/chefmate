@@ -1,8 +1,8 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe( Dishes::IngredientsController ) do
 
-  let(:ingredient)  { mock_model(Ingredient, :save => nil ) }
+  let(:ingredient)  { stub_model(Ingredient) }
   let(:ingredients) { mock( :ingredients, :new => ingredient ) }
   let(:dish)        { mock_model( Dish, :ingredients => ingredients, :id => 'dish-ID' ) }
 
@@ -32,19 +32,48 @@ describe( Dishes::IngredientsController ) do
     let(:component) { mock_model(Component) }
 
     before(:each) do
-      Component.stub(:find).and_return( component )
+      Component.stub(:find_by_name)
     end
+
+    subject { post 'create', 'dish_id' => 'dish-ID', 'ingredient' => { 'name' => 'Spinach', 'amount' => '250g' } }
 
     it 'should find the Dish' do
       Dish.should_receive(:find).with('dish-ID')
-      post 'create', 'dish_id' => 'dish-ID', 'ingredient' => { 'component_id' => 'component-ID' }
+      subject()
     end
 
-    it 'should create a Ingredient belonging to the dish' do
+    it 'should find the Component matching the ingredient name' do
+      Component.should_receive(:find_by_name).with('Spinach')
+      subject()
+    end
+
+    describe( 'when no matching component exists' ) do
+      before(:each) do
+        Component.stub(:find_by_name).and_return( nil )
+      end
+
+      it 'should create the component' do
+        Component.should_receive(:create!)
+        subject()
+      end
+    end
+
+    describe( 'when the component already exists' ) do
+      before(:each) do
+        Component.stub(:find_by_name).and_return( component )
+      end
+
+      it 'should assign the component to the ingredient' do
+        subject()
+        ingredient.component.should == component
+      end
+    end
+
+    it 'should create an Ingredient belonging to the dish' do
       dish.should_receive(:ingredients).and_return(ingredients)
       ingredients.should_receive(:new)
 
-      post 'create', 'dish_id' => 'dish-ID', 'ingredient' => { 'component_id' => 'component-ID' }
+      subject()
     end
 
     describe 'when the Ingredient is saved successfully' do
@@ -53,12 +82,12 @@ describe( Dishes::IngredientsController ) do
       end
 
       it 'should create a flash message' do
-        post 'create', 'dish_id' => 'dish-ID', 'component_id' => 'component-ID'
+        subject()
         flash[:success].should_not be_nil
       end
 
       it 'should redirect back to the Dish show' do
-        post 'create', 'dish_id' => 'dish-ID', 'component_id' => 'component-ID'
+        subject()
         response.should redirect_to( dish_path(dish) )
       end
     end
@@ -69,12 +98,12 @@ describe( Dishes::IngredientsController ) do
       end
 
       it 'should create a flash message' do
-        post 'create', 'dish_id' => 'dish-ID', 'component_id' => 'component-ID'
+        subject()
         flash[:error].should_not be_nil
       end
 
       it 'should render #new' do
-        post 'create', 'dish_id' => 'dish-ID', 'component_id' => 'component-ID'
+        subject()
         response.should render_template('new')
       end
     end

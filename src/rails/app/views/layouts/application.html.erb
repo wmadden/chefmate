@@ -29,17 +29,17 @@
   </div>
 
   <div id="bd">
-    <% if flash.length > 0 %>
-      <ul id="flash-messages">
-        <% flash.each_pair do |type, message| %>
-          <li class="<%= type %> message">
-            <%= message %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-
     <div class="content">
+      <% if flash.length > 0 %>
+        <ul id="flash-messages">
+          <% flash.each_pair do |type, message| %>
+            <li class="<%= type %> message">
+              <%= message %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+
       <%= yield %>
     </div>
   </div>

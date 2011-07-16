@@ -15,7 +15,7 @@ Feature: Manage items on a menu
     When I click the "Add Ingredient" link
       And I enter:
         | input      | value           |
-        | Ingredient | Some Ingredient |
+        | Name       | Some Ingredient |
       And I click the "Add Ingredient" button
     Then I should see the heading "Some Dish"
       And I should see "Some Ingredient"

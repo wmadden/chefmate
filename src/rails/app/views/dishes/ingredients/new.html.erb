@@ -1,0 +1,12 @@
+<h2>Add Ingredient</h2>
+
+<%= semantic_form_for [@dish, @ingredient] do |form| %>
+  <%= form.inputs do %>
+    <%= form.input :name, :required => true %>
+    <%= form.input :amount %>
+  <% end %>
+
+  <% form.buttons do %>
+    <%= form.commit_button :label => "Add Ingredient" %>
+  <% end %>
+<% end %>

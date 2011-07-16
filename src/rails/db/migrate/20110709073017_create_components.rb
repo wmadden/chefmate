@@ -1,7 +1,7 @@
 class CreateComponents < ActiveRecord::Migration
   def self.up
     create_table :components do |t|
-      t.string :amount
+      t.string :name
 
       t.timestamps
     end
