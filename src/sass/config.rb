@@ -2,8 +2,9 @@
 
 # Set this to the root of your project when deployed:
 http_path = "/"
-css_dir = "../rails/public/stylesheets"
-sass_dir = "."
+
+css_path = "../rails/public/stylesheets"
+sass_path = "."
 images_dir = "../rails/public/images"
 javascripts_dir = "../rails/public/javascripts"
 

@@ -18,6 +18,12 @@
 <div id="doc">
 
   <div id="hd">
+    <%= link_to root_path do %>
+      <h1 id="site-title">
+        ChefMate
+      </h1>
+    <% end %>
+
     <ul id="primary-nav">
       <li class="<%= current_tab?(:menus) %> item">
         <%= link_to "Menus", menus_path %>
