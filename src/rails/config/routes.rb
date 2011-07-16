@@ -4,7 +4,9 @@ Meals::Application.routes.draw do
     resources :items, :controller => "menus/menu_items"
   end
 
-  resources :dishes
+  resources :dishes do
+    resources :ingredients, :controller => "dishes/ingredients"
+  end
 
   root :to => "menus#index"
 
