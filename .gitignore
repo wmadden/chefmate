@@ -9,3 +9,4 @@ src/rails/log/test.log
 src/rails/db/test.sqlite3
 */**/.sass-cache/
 *.css
+.DS_Store
