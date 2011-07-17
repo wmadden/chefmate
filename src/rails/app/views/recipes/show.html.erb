@@ -1,20 +1,28 @@
-<h2><%= @recipe.name %></h2>
+<div class="section-heading">
+  <h2><%= @recipe.name %></h2>
 
-<ul class="actions">
-  <li class="positive action">
-    <%= link_to 'Add Ingredient', new_recipe_ingredient_path(@recipe) %>
-  </li>
-  <li class="positive action">
-    <%= link_to 'Edit Recipe', edit_recipe_path(@recipe) %>
-  </li>
-</ul>
+  <ul class="actions">
+    <li class="positive action">
+      <%= link_to 'Edit Recipe', edit_recipe_path(@recipe), :class => 'edit icon' %>
+    </li>
+  </ul>
+</div>
 
-<h3>Ingredients</h3>
+<div class="section-heading">
+  <h3>Ingredients</h3>
+
+  <ul class="actions">
+    <li class="positive action">
+      <%= link_to 'Add Ingredient', new_recipe_ingredient_path(@recipe), :class => 'add icon' %>
+    </li>
+  </ul>
+</div>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
+      <th>Amount</th>
     </tr>
   </thead>
   <tfoot></tfoot>
@@ -22,6 +30,7 @@
     <% @recipe.ingredients.each do |ingredient| %>
       <tr>
         <td><%= ingredient.name %></td>
+        <td><%= ingredient.amount %></td>
       </tr>
     <% end %>
   </tbody>

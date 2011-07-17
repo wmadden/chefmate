@@ -1,18 +1,25 @@
-<h2><%= @menu.name %></h2>
+<div class="section-heading">
+  <h2><%= @menu.name %></h2>
 
-<ul class="actions">
-  <li class="positive action">
-    <%= link_to 'Edit Menu', edit_menu_path(@menu) %>
-  </li>
-  <li class="positive action">
-    <%= link_to 'Add Dish', new_menu_dish_path(@menu) %>
-  </li>
-  <li class="positive action">
-    <%= link_to 'Shopping List', shopping_list_menu_path(@menu) %>
-  </li>
-</ul>
+  <ul class="actions">
+    <li class="positive action">
+      <%= link_to 'Edit Menu', edit_menu_path(@menu), :class => "edit icon" %>
+    </li>
+    <li class="positive action">
+      <%= link_to 'Shopping List', shopping_list_menu_path(@menu), :class => "list icon" %>
+    </li>
+  </ul>
+</div>
 
-<h3>Dishes</h3>
+<div class="section-heading">
+  <h3>Dishes</h3>
+
+  <ul class="actions">
+    <li class="positive action">
+      <%= link_to 'Add Dish', new_menu_dish_path(@menu), :class => "add icon" %>
+    </li>
+  </ul>
+</div>
 
 <table>
   <thead>
