@@ -1,7 +1,7 @@
 class CreateIngredients < ActiveRecord::Migration
   def self.up
     create_table :ingredients do |t|
-      t.integer :dish_id
+      t.integer :recipe_id
       t.integer :component_id
       t.string :amount
 

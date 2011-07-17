@@ -1,8 +1,8 @@
-<h2>Dishes</h2>
+<h2>Recipes</h2>
 
 <ul class="actions">
   <li class="positive action">
-    <%= link_to "New Dish", new_dish_path %>
+    <%= link_to "New Recipe", new_recipe_path %>
   </li>
 </ul>
 
@@ -14,10 +14,10 @@
   </thead>
   <tfoot></tfoot>
   <tbody>
-    <% @dishes.each do |dish| %>
+    <% @recipes.each do |recipe| %>
       <tr>
         <td>
-          <%= link_to dish.name, dish_path(dish) %>
+          <%= link_to recipe.name, recipe_path(recipe) %>
         </td>
       </tr>
     <% end  %>

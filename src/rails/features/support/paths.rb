@@ -17,11 +17,11 @@ module NavigationHelpers
     when /^the menu show screen$/
       menu_path( @menu )
 
-    when /^the existing dishes screen$/
-      dishes_path
+    when /^the existing recipes screen$/
+      recipes_path
 
-    when /^the dish show screen$/
-      dish_path( @dish )
+    when /^the recipe show screen$/
+      recipe_path( @recipe )
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

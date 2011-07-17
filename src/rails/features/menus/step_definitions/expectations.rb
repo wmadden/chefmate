@@ -16,9 +16,9 @@ Then /^I should see the heading "([^"]+)"$/ do |heading|
   end
 end
 
-Then /^I should see the names of all existing dishes$/ do
-  @dishes.each do |dish|
-    page.should have_content(dish.name)
+Then /^I should see the names of all existing recipes$/ do
+  @recipes.each do |recipe|
+    page.should have_content(recipe.name)
   end
 end
 

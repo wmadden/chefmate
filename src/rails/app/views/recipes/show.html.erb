@@ -1,11 +1,11 @@
-<h2><%= @dish.name %></h2>
+<h2><%= @recipe.name %></h2>
 
 <ul class="actions">
   <li class="positive action">
-    <%= link_to 'Add Ingredient', new_dish_ingredient_path(@dish) %>
+    <%= link_to 'Add Ingredient', new_recipe_ingredient_path(@recipe) %>
   </li>
   <li class="positive action">
-    <%= link_to 'Edit Dish', edit_dish_path(@dish) %>
+    <%= link_to 'Edit Recipe', edit_recipe_path(@recipe) %>
   </li>
 </ul>
 
@@ -19,7 +19,7 @@
   </thead>
   <tfoot></tfoot>
   <tbody>
-    <% @dish.ingredients.each do |ingredient| %>
+    <% @recipe.ingredients.each do |ingredient| %>
       <tr>
         <td><%= ingredient.name %></td>
       </tr>

@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe MenuItem do
+describe Dish do
 end

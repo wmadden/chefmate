@@ -151,12 +151,12 @@ describe MenusController do
   end
 
   describe '#shopping_list' do
-    let(:dish1) { mock_model( Dish, :ingredients => [:ingredient1, :ingredient2] ) }
-    let(:dish2) { mock_model( Dish, :ingredients => [:ingredient3, :ingredient4] ) }
+    let(:recipe1) { mock_model( Recipe, :ingredients => [:ingredient1, :ingredient2] ) }
+    let(:recipe2) { mock_model( Recipe, :ingredients => [:ingredient3, :ingredient4] ) }
 
-    let(:dishes) { [dish1, dish2] }
+    let(:recipes) { [recipe1, recipe2] }
 
-    let(:menu) { mock_model( Menu, :dishes => dishes) }
+    let(:menu) { mock_model( Menu, :recipes => recipes) }
 
     before(:each) do
       Menu.stub(:find).and_return(menu)
@@ -167,8 +167,8 @@ describe MenusController do
       get 'shopping_list', :id => 'menu-ID'
     end
 
-    describe 'for a menu with dishes, with ingredients' do
-      it 'should assign an array of all ingredients in all dishes to @ingredients' do
+    describe 'for a menu with recipes, with ingredients' do
+      it 'should assign an array of all ingredients in all recipes to @ingredients' do
         get 'shopping_list', :id => 'menu-ID'
 
         assigns(:ingredients).should include(:ingredient1)

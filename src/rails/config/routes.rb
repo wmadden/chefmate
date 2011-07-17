@@ -1,14 +1,15 @@
 Meals::Application.routes.draw do
 
   resources :menus do
-    resources :items, :controller => "menus/menu_items"
+    resources :dishes, :controller => "menus/dishes"
+
     member do
       get :shopping_list
     end
   end
 
-  resources :dishes do
-    resources :ingredients, :controller => "dishes/ingredients"
+  resources :recipes do
+    resources :ingredients, :controller => "recipes/ingredients"
   end
 
   root :to => "menus#index"

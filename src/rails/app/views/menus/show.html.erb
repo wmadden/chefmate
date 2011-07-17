@@ -5,7 +5,7 @@
     <%= link_to 'Edit Menu', edit_menu_path(@menu) %>
   </li>
   <li class="positive action">
-    <%= link_to 'New Item', new_menu_item_path(@menu) %>
+    <%= link_to 'New Item', new_dish_path(@menu) %>
   </li>
   <li class="positive action">
     <%= link_to 'Shopping List', shopping_list_menu_path(@menu) %>
@@ -15,7 +15,7 @@
 <table>
   <thead>
     <tr>
-      <th>Dish</th>
+      <th>Recipe</th>
     </tr>
   </thead>
   <tfoot></tfoot>
@@ -23,7 +23,7 @@
     <% @menu.items.each do |item| %>
       <tr>
         <td>
-          <%= item.dish.name %>
+          <%= item.recipe.name %>
         </td>
       </tr>
     <% end %>

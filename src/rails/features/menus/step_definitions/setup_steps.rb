@@ -9,28 +9,28 @@ Given /^the following menu exists:$/ do |table|
   @menu = Menu.create!( table.hashes.first )
 end
 
-Given /^the following dishes exist:$/ do |table|
-  @dishes = []
+Given /^the following recipes exist:$/ do |table|
+  @recipes = []
   table.hashes.each do |hash|
-    @dishes << Dish.create!( hash )
+    @recipes << Recipe.create!( hash )
   end
 end
 
-Given /^the following dish exists:$/ do |table|
-  @dish = Dish.create!( table.hashes.first )
+Given /^the following recipe exists:$/ do |table|
+  @recipe = Recipe.create!( table.hashes.first )
 end
 
-Given /^the dish "([^"]*)" has the following ingredients:$/ do |dish_name, ingredients|
-  @dish = Dish.find_by_name( dish_name )
+Given /^the recipe "([^"]*)" has the following ingredients:$/ do |recipe_name, ingredients|
+  @recipe = Recipe.find_by_name( recipe_name )
   ingredients.hashes.each do |ingredient_hash|
-    ingredient = @dish.ingredients.new
+    ingredient = @recipe.ingredients.new
     ingredient.component = Component.create!( :name => ingredient_hash['name'] )
     ingredient.save!
   end
 end
 
-Given /^the menu contains the following dishes:$/ do |dishes|
-  dishes.hashes.each do |dish|
-    @menu.items << MenuItem.new( :dish => Dish.find_by_name(dish['name']) )
+Given /^the menu contains the following recipes:$/ do |recipes|
+  recipes.hashes.each do |recipe|
+    @menu.items << Dish.new( :recipe => Recipe.find_by_name(recipe['name']) )
   end
 end

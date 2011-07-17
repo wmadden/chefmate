@@ -1,28 +1,28 @@
 require 'spec_helper'
 
-describe( Dishes::IngredientsController ) do
+describe( Recipes::IngredientsController ) do
 
   let(:ingredient)  { stub_model(Ingredient) }
   let(:ingredients) { mock( :ingredients, :new => ingredient ) }
-  let(:dish)        { mock_model( Dish, :ingredients => ingredients, :id => 'dish-ID' ) }
+  let(:recipe)        { mock_model( Recipe, :ingredients => ingredients, :id => 'recipe-ID' ) }
 
-  before(:each)     { Dish.stub(:find).and_return( dish ) }
+  before(:each)     { Recipe.stub(:find).and_return( recipe ) }
 
   describe '#new' do
-    it 'should find the dish' do
-      Dish.should_receive(:find).with('dish-ID')
-      get 'new', 'dish_id' => 'dish-ID'
+    it 'should find the recipe' do
+      Recipe.should_receive(:find).with('recipe-ID')
+      get 'new', 'recipe_id' => 'recipe-ID'
     end
 
-    it 'should create a dish item belonging to the dish' do
-      dish.should_receive(:ingredients).and_return(ingredients)
+    it 'should create a recipe item belonging to the recipe' do
+      recipe.should_receive(:ingredients).and_return(ingredients)
       ingredients.should_receive(:new)
 
-      get 'new', 'dish_id' => 'dish-ID'
+      get 'new', 'recipe_id' => 'recipe-ID'
     end
 
     it 'should assign it to @ingredient' do
-      get 'new', 'dish_id' => 'dish-ID'
+      get 'new', 'recipe_id' => 'recipe-ID'
 
       assigns(:ingredient).should == ingredient
     end
@@ -35,10 +35,10 @@ describe( Dishes::IngredientsController ) do
       Component.stub(:find_by_name)
     end
 
-    subject { post 'create', 'dish_id' => 'dish-ID', 'ingredient' => { 'name' => 'Spinach', 'amount' => '250g' } }
+    subject { post 'create', 'recipe_id' => 'recipe-ID', 'ingredient' => { 'name' => 'Spinach', 'amount' => '250g' } }
 
-    it 'should find the Dish' do
-      Dish.should_receive(:find).with('dish-ID')
+    it 'should find the Recipe' do
+      Recipe.should_receive(:find).with('recipe-ID')
       subject()
     end
 
@@ -69,8 +69,8 @@ describe( Dishes::IngredientsController ) do
       end
     end
 
-    it 'should create an Ingredient belonging to the dish' do
-      dish.should_receive(:ingredients).and_return(ingredients)
+    it 'should create an Ingredient belonging to the recipe' do
+      recipe.should_receive(:ingredients).and_return(ingredients)
       ingredients.should_receive(:new)
 
       subject()
@@ -86,9 +86,9 @@ describe( Dishes::IngredientsController ) do
         flash[:success].should_not be_nil
       end
 
-      it 'should redirect back to the Dish show' do
+      it 'should redirect back to the Recipe show' do
         subject()
-        response.should redirect_to( dish_path(dish) )
+        response.should redirect_to( recipe_path(recipe) )
       end
     end
 

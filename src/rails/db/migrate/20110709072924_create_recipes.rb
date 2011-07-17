@@ -1,6 +1,6 @@
-class CreateDishes < ActiveRecord::Migration
+class CreateRecipes < ActiveRecord::Migration
   def self.up
-    create_table :dishes do |t|
+    create_table :recipes do |t|
       t.string :name
       t.string :recipe_url
 
@@ -9,6 +9,6 @@ class CreateDishes < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :dishes
+    drop_table :recipes
   end
 end

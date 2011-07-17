@@ -11,27 +11,27 @@ Feature: Manage items on a menu
 
   Scenario: Add a dish to a menu
     Given I am on the menu show screen
-    And the following dish exists:
+    And the following recipe exists:
       | name      |
-      | Some Dish |
-    When I click the "New Item" link
-      And I choose the Dish "Some Dish"
-      And I click the "Create Menu item" button
+      | Some Recipe |
+    When I click the "Add Dish" link
+      And I choose the Recipe "Some Recipe"
+      And I click the "Add Dish" button
     Then I should see the heading "Some Menu"
-      And I should see "Some Dish"
+      And I should see "Some Recipe"
 
   @wip
-  Scenario: See visual feedback that the dish will be added to the menu
+  Scenario: See visual feedback that the recipe will be added to the menu
     Given I am on the menu show screen
-    When I click the "add dish" link
-      And I type in the name of a dish
-    Then the "add dish" button should be enabled
+    When I click the "add recipe" link
+      And I type in the name of a recipe
+    Then the "add recipe" button should be enabled
       And it should have the "add" icon
 
   @wip
-  Scenario: See visual feedback that I need to enter a dish's name
+  Scenario: See visual feedback that I need to enter a recipe's name
     Given I am on the menu show screen
-    When I click the "add dish" link
-    Then I should see a prompt to "enter the name of the dish you want to add"
-      And the "add dish" button should be disabled
+    When I click the "add recipe" link
+    Then I should see a prompt to "enter the name of the recipe you want to add"
+      And the "add recipe" button should be disabled
 

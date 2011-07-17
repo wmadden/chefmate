@@ -1,14 +1,14 @@
 class CreateMenuItems < ActiveRecord::Migration
   def self.up
-    create_table :menu_items do |t|
+    create_table :dishes do |t|
       t.integer :menu_id
-      t.integer :dish_id
+      t.integer :recipe_id
 
       t.timestamps
     end
   end
 
   def self.down
-    drop_table :menu_items
+    drop_table :dishes
   end
 end
