@@ -1,1 +1,11 @@
-<%= render :partial => 'form' %>
+<h2>Add Dish</h2>
+
+<%= semantic_form_for [@menu, @dish] do |form| %>
+  <%= form.inputs do %>
+    <%= form.input :recipe %>
+  <% end %>
+
+  <%= form.buttons do %>
+    <%= form.commit_button :label => "Add Dish" %>
+  <% end %>
+<% end %>

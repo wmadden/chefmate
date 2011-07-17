@@ -1,5 +1,5 @@
 @menu
-Feature: Manage items on a menu
+Feature: Manage ingredients in a recipe
   As a user
   I want to know what I need to make each recipe
   And I want to know the nutritional content of each recipe

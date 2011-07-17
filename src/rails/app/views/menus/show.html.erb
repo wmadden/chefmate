@@ -5,25 +5,27 @@
     <%= link_to 'Edit Menu', edit_menu_path(@menu) %>
   </li>
   <li class="positive action">
-    <%= link_to 'New Item', new_dish_path(@menu) %>
+    <%= link_to 'Add Dish', new_menu_dish_path(@menu) %>
   </li>
   <li class="positive action">
     <%= link_to 'Shopping List', shopping_list_menu_path(@menu) %>
   </li>
 </ul>
 
+<h3>Dishes</h3>
+
 <table>
   <thead>
     <tr>
-      <th>Recipe</th>
+      <th>Name</th>
     </tr>
   </thead>
   <tfoot></tfoot>
   <tbody>
-    <% @menu.items.each do |item| %>
+    <% @menu.dishes.each do |dish| %>
       <tr>
         <td>
-          <%= item.recipe.name %>
+          <%= dish.recipe.name %>
         </td>
       </tr>
     <% end %>

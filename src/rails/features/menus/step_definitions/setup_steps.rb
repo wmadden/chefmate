@@ -31,6 +31,6 @@ end
 
 Given /^the menu contains the following recipes:$/ do |recipes|
   recipes.hashes.each do |recipe|
-    @menu.items << Dish.new( :recipe => Recipe.find_by_name(recipe['name']) )
+    @menu.dishes.create!( :recipe => Recipe.find_by_name(recipe['name']) )
   end
 end

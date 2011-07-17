@@ -1,5 +1,5 @@
 @menu
-Feature: Manage items on a menu
+Feature: Manage dishes on a menu
   As a user
   I want my menu to contain dishes I like
   For example, by adding the dishes I like to my menu, and removing those I don't

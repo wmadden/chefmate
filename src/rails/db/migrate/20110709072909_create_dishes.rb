@@ -1,4 +1,4 @@
-class CreateMenuItems < ActiveRecord::Migration
+class CreateDishes < ActiveRecord::Migration
   def self.up
     create_table :dishes do |t|
       t.integer :menu_id
