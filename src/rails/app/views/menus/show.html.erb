@@ -1,5 +1,14 @@
 <h2><%= @menu.name %></h2>
 
+<ul class="actions">
+  <li class="positive action">
+    <%= link_to 'Edit Menu', edit_menu_path(@menu) %>
+  </li>
+  <li class="positive action">
+    <%= link_to 'New Item', new_menu_item_path(@menu) %>
+  </li>
+</ul>
+
 <table>
   <thead>
     <tr>
@@ -17,6 +26,3 @@
     <% end %>
   </tbody>
 </table>
-
-<%= link_to 'Edit Menu', edit_menu_path(@menu) %>
-<%= link_to 'New Item', new_menu_item_path(@menu) %>
