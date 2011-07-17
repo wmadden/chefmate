@@ -42,4 +42,12 @@ class MenusController < ApplicationController
     end
   end
 
+  def shopping_list
+    @menu = Menu.find( params['id'] )
+    @ingredients = []
+    @menu.dishes.each do |dish|
+      @ingredients += dish.ingredients
+    end
+  end
+
 end

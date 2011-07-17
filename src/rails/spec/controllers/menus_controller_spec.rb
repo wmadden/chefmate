@@ -150,4 +150,33 @@ describe MenusController do
     end
   end
 
+  describe '#shopping_list' do
+    let(:dish1) { mock_model( Dish, :ingredients => [:ingredient1, :ingredient2] ) }
+    let(:dish2) { mock_model( Dish, :ingredients => [:ingredient3, :ingredient4] ) }
+
+    let(:dishes) { [dish1, dish2] }
+
+    let(:menu) { mock_model( Menu, :dishes => dishes) }
+
+    before(:each) do
+      Menu.stub(:find).and_return(menu)
+    end
+
+    it 'should find the Menu' do
+      Menu.should_receive(:find).with('menu-ID')
+      get 'shopping_list', :id => 'menu-ID'
+    end
+
+    describe 'for a menu with dishes, with ingredients' do
+      it 'should assign an array of all ingredients in all dishes to @ingredients' do
+        get 'shopping_list', :id => 'menu-ID'
+
+        assigns(:ingredients).should include(:ingredient1)
+        assigns(:ingredients).should include(:ingredient2)
+        assigns(:ingredients).should include(:ingredient3)
+        assigns(:ingredients).should include(:ingredient4)
+      end
+    end
+  end
+
 end

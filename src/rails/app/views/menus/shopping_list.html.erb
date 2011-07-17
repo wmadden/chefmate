@@ -1,0 +1,21 @@
+<h2>
+  <%= @menu.name %> Shopping List
+</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tfoot></tfoot>
+  <tbody>
+    <% @ingredients.each do |ingredient| %>
+      <tr>
+        <td><%= ingredient.name %></td>
+        <td><%= ingredient.amount %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
