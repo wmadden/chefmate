@@ -1,4 +1,3 @@
-@wip
 Feature: Shopping List
   As a User
   I want to buy all the ingredients I need for the dishes on my menu
@@ -6,9 +5,9 @@ Feature: Shopping List
 
   Scenario: View shopping list
     Given the following dishes exist:
-      | name      |
-      | Tacos     |
-      | Spaghetti |
+      | name                 |
+      | Tacos                |
+      | Spaghetti Bolognaise |
       And the dish "Tacos" has the following ingredients:
         | name     |
         | Meat     |
@@ -24,8 +23,8 @@ Feature: Shopping List
         | name                 |
         | Tacos                |
         | Spaghetti Bolognaise |
-    When I go to the show menu screen
-      And click the "Shopping List" link
+      And I am on the menu show screen
+    When I click the "Shopping List" link
     Then I should see the following ingredients:
       | name      |
       | Meat      |

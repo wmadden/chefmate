@@ -25,3 +25,9 @@ end
 Then /^I should see an? ([a-zA-Z]+) message$/ do |message_type|
   page.should have_css("#flash-messages .#{message_type}.message")
 end
+
+Then /^I should see the following ingredients:$/ do |ingredients|
+  ingredients.hashes.each do |ingredient|
+    page.should have_content( ingredient['name'] )
+  end
+end

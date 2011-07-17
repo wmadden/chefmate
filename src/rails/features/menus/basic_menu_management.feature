@@ -33,7 +33,7 @@ Feature: Managing menus
       | name            |
       | Some Menu       |
       | Some Other Menu |
-    And I am on the existing menus screen
+      And I am on the existing menus screen
     When I click the "Some Menu" link
     Then I should see the heading "Some Menu"
 
@@ -41,7 +41,7 @@ Feature: Managing menus
     Given the following menu exists:
       | name            |
       | Some Menu       |
-    And I am on the menu show screen
+      And I am on the menu show screen
     When I click the "Edit Menu" link
       And I enter:
         | input       | value              |
