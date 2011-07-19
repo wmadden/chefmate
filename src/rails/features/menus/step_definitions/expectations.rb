@@ -31,3 +31,9 @@ Then /^I should see the following ingredients:$/ do |ingredients|
     page.should have_content( ingredient['name'] )
   end
 end
+
+Then /^I should not see "([^"]+)" in the dishes table$/ do |value|
+  within( "table.dishes" ) do
+    page.should_not have_content( value )
+  end
+end

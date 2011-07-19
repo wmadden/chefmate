@@ -10,15 +10,26 @@ Feature: Manage dishes on a menu
       | Some Menu       |
 
   Scenario: Add a dish to a menu
-    Given I am on the menu show screen
-    And the following recipe exists:
-      | name      |
+    Given the following recipe exists:
+      | name        |
       | Some Recipe |
+      And I am on the menu show screen
     When I click the "Add Dish" link
       And I choose the Recipe "Some Recipe"
       And I click the "Add Dish" button
     Then I should see the heading "Some Menu"
       And I should see "Some Recipe"
+
+  Scenario: Remove a dish from a menu
+    Given the following recipe exists:
+      | name        |
+      | Some Recipe |
+      And the menu contains the following recipes:
+        | name        |
+        | Some Recipe |
+      And I am on the menu show screen
+    When I click the "Remove Dish" link
+    Then I should not see "Some Recipe" in the dishes table
 
   @wip
   Scenario: See visual feedback that the recipe will be added to the menu

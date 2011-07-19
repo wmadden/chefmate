@@ -5,4 +5,6 @@ class Dish < ActiveRecord::Base
 
   validates_presence_of :recipe, :menu
 
+  delegate :name, :to => :recipe
+
 end

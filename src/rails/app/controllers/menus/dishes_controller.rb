@@ -18,4 +18,15 @@ class Menus::DishesController < ApplicationController
     end
   end
 
+  def destroy
+    @menu = Menu.find( params['menu_id'] )
+    @dish = @menu.dishes.find( params['id'] )
+
+    @dish.delete
+
+    flash[:success] = "Successfully removed #{@dish.name} from the menu"
+
+    redirect_to menu_path(@menu)
+  end
+
 end

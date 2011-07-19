@@ -21,7 +21,7 @@
   </ul>
 </div>
 
-<table>
+<table class="dishes">
   <thead>
     <tr>
       <th>Name</th>
@@ -32,7 +32,12 @@
     <% @menu.dishes.each do |dish| %>
       <tr>
         <td>
-          <%= dish.recipe.name %>
+          <%= link_to dish.name, recipe_path(dish) %>
+          <ul class="actions">
+            <li class="positive action">
+              <%= link_to 'Remove Dish', menu_dish_path(@menu, dish), :method => :delete, :class => 'remove icon' %>
+            </li>
+          </ul>
         </td>
       </tr>
     <% end %>

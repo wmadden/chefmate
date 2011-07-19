@@ -205,3 +205,7 @@ Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
     assert_equal expected_params, actual_params
   end
 end
+
+Then "show me the response" do
+  puts page.body
+end

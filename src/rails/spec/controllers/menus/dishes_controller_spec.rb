@@ -79,4 +79,43 @@ describe Menus::DishesController do
     end
   end
 
+  describe '#destroy' do
+    let(:dish) { mock_model(Dish, :delete => nil, :name => 'abc') }
+    let(:dishes) { mock(:dishes, :find => dish) }
+    let(:menu) { mock_model(Menu, :dishes => dishes) }
+
+    before(:each) do
+      Menu.stub(:find).and_return( menu )
+    end
+
+    subject do
+      delete 'destroy', 'menu_id' => 'menu-ID', 'id' => 'dish-ID'
+    end
+
+    it 'should find the Menu' do
+      Menu.should_receive(:find).with('menu-ID')
+      subject
+    end
+
+    it "should find the Dish in the Menu's dishes collection" do
+      dishes.should_receive(:find).with('dish-ID')
+      subject
+    end
+
+    it "should delete the Dish" do
+      dish.should_receive(:delete)
+      subject
+    end
+
+    it "should output a success message" do
+      subject
+      flash[:success].should_not be_nil
+    end
+
+    it 'should redirect to Menu show' do
+      subject
+      response.should redirect_to( menu_path(menu) )
+    end
+  end
+
 end
