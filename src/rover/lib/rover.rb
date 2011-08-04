@@ -1,0 +1,1 @@
+require "rover/scrapers/recipes_com_au"

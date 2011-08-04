@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby -Ilib
+
+require "rover"
+require "rover/application"
+
+Rover::Application.run( ARGV )

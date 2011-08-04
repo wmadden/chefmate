@@ -1,0 +1,6 @@
+source 'http://rubygems.org'
+
+gem 'mechanize'
+gem 'rspec'
+gem 'mongo'
+gem 'bson_ext'
