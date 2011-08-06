@@ -4,3 +4,11 @@ gem 'mechanize'
 gem 'rspec'
 gem 'mongo'
 gem 'bson_ext'
+
+gem 'guard'
+gem 'rb-fsevent'
+gem 'growl'
+gem 'guard-bundler'
+#gem 'guard-cucumber'
+gem 'guard-rspec'
+
