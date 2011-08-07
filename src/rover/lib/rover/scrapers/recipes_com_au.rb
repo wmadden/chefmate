@@ -1,9 +1,83 @@
 require "pp"
+require "mechanize"
 
 module Rover
 module Scrapers
   
   class RecipesComAu
+    attr_reader :root_collection,
+                :agent
+    
+    ROOT_URL = 'http://recipes.com.au/'
+    
+    class Collection
+      def initialize( url )
+        @url = url
+      end
+    end
+    
+    def collections
+      root_collection.collections
+    end
+    
+    def initialize
+      @agent = Mechanize.new
+    end
+    
+    def scrape
+      @root_collection = get_root_collection
+      
+      parse_collection( @root_collection )
+      # go_to_collections_page
+      #       
+      #       collections = find_collections
+      #       
+      #       while collections.length > 0
+      #         collection = prompt_for_collection(collections)
+      #         @collection_page = go_to_collection_page(collection)
+      #         collections = find_collections
+      #       end
+      #       
+      #       while true
+      #         recipe = prompt_for_recipe
+      #         
+      #         go_to_recipe(recipe)
+      #         
+      #         recipe = parse_recipe
+      #         pp recipe
+      #         
+      #         save_recipe( recipe )
+      #       end
+    end
+    
+    def fetch_root
+      puts "Fetching recipes.com.au..."
+      @agent.get( ROOT_URL )
+    end
+    
+    def get_root_collection
+      fetch_root
+      Collection.new( @agent.page.links_with(:text => 'recipe collections')[0].href )
+    end
+    
+    def parse_collection( collection )
+      if collection.collections.length > 0
+        pages = []
+        collection.collections.each do |subcollection|
+          pages += parse_collection( subcollection )
+        end
+        pages
+      elsif collection.pages.length > 0
+        collection.pages.map do |page|
+          parse_page( page )
+        end
+      else
+        []
+      end
+    end
+    
+    # -------------------
+    
     def go_to_collections_page
       puts "Navigating to recipe collections..."
       @agent.page.links_with(:text => 'recipe collections')[0].click
@@ -38,34 +112,7 @@ module Scrapers
       index = $stdin.gets.to_i
       recipes[index]
     end
-
-    def scrape
-      @agent = Mechanize.new
-
-      get_root
-      
-      go_to_collections_page
-
-      collections = find_collections
-
-      while collections.length > 0
-        collection = prompt_for_collection(collections)
-        @collection_page = go_to_collection_page(collection)
-        collections = find_collections
-      end
-
-      while true
-        recipe = prompt_for_recipe
-
-        go_to_recipe(recipe)
-
-        recipe = parse_recipe
-        pp recipe
-        
-        save_recipe( recipe )
-      end
-    end
-
+    
     def go_to_recipe( recipe )
       @agent.get( recipe.css("a")[0].attr("href") )
     end
@@ -133,11 +180,6 @@ module Scrapers
       end
 
       result
-    end
-
-    def get_root
-      puts "Fetching recipes.com.au..."
-      @agent.get('http://recipes.com.au/')
     end
 
     def go_to_collection_page(collection)
