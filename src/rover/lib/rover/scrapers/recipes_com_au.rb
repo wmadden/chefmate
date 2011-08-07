@@ -11,8 +11,45 @@ module Scrapers
     ROOT_URL = 'http://recipes.com.au/'
     
     class Collection
+      attr_reader :collections,
+                  :recipes
+                  
       def initialize( url )
         @url = url
+        @agent = Mechanize.new
+        @collections = []
+        @recipes = []
+      end
+      
+      def fetch
+        @agent.get( @url )
+        
+        collections = @agent.page.parser.css(".groupbox")
+        @collections = collections.map do |element|
+          parse_collection_element( element )
+        end
+        
+        recipes = @agent.page.parser.css(".searchpaper .list > tr")
+        @recipes = recipes.map do |element|
+          parse_recipe_element( element )
+        end
+      end
+      
+      # --------
+      
+      # Note: these methods aren't tested, since they're so heavily dependent on the structure
+      # of the page, which isn't controlled by me.
+      
+      def parse_collection_element( element )
+        link = element.css("a")[1]
+        Collection.new( link.text, link.attr("href") )
+      end
+      
+      def parse_recipe_element( element )
+        {
+          :title => element.css("h4").text.strip,
+          :url => element.css("a")[0].attr("href")
+        }
       end
     end
     
@@ -62,14 +99,14 @@ module Scrapers
     
     def parse_collection( collection )
       if collection.collections.length > 0
-        pages = []
+        recipes = []
         collection.collections.each do |subcollection|
-          pages += parse_collection( subcollection )
+          recipes += parse_collection( subcollection )
         end
-        pages
-      elsif collection.pages.length > 0
-        collection.pages.map do |page|
-          parse_page( page )
+        recipes
+      elsif collection.recipes.length > 0
+        collection.recipes.map do |recipe|
+          parse_recipe( recipe )
         end
       else
         []
@@ -78,11 +115,6 @@ module Scrapers
     
     # -------------------
     
-    def go_to_collections_page
-      puts "Navigating to recipe collections..."
-      @agent.page.links_with(:text => 'recipe collections')[0].click
-    end
-
     def find_collections
       @agent.page.parser.css(".groupbox")
     end
