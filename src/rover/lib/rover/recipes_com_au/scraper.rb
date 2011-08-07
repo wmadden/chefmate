@@ -60,35 +60,6 @@ module Rover::RecipesComAu
       return recipe
     end
     
-    # def parse_recipe
-    #       recipe = {}
-    #       
-    #       recipe[:source] = {
-    #         :uri => @agent.page.uri.to_s,
-    #         :site => "recipes.com.au"
-    #       }
-    #       
-    #       recipe[:parser] = {
-    #         :version => "1.0.0",
-    #         :parsed_at => Time.now
-    #       }
-    #       
-    #       recipe_div = @agent.page.parser.css(".maincopy")
-    # 
-    #       recipe[:title] = recipe_div.css("h2").text.strip
-    # 
-    #       ingredients_div = recipe_div.css(".ingredients")
-    #       recipe[:serves] = ingredients_div.css(".serves").text.strip
-    # 
-    #       recipe[:ingredients] = parse_ingredients( ingredients_div.css("ul") )
-    #       recipe[:directions] = parse_directions( recipe_div.css(".howto") )
-    #       recipe[:preparation_time] = parse_preparation_time( recipe_div )
-    #       recipe[:cooking_time] = parse_cooking_time( recipe_div )
-    #       recipe[:nutrition_table] = parse_nutrition_table( @agent.page.parser.css(".nutpaper") )
-    # 
-    #       recipe
-    #     end
-    
     # -------------------
     
     def find_collections
@@ -119,55 +90,6 @@ module Rover::RecipesComAu
       puts "Which one do you want to steal?"
       index = $stdin.gets.to_i
       recipes[index]
-    end
-    
-    def go_to_recipe( recipe )
-      @agent.get( recipe.css("a")[0].attr("href") )
-    end
-
-    def parse_ingredients( ul )
-      result = []
-      ul.css("li").each do |li|
-        result << li.text.strip
-      end
-      result
-    end
-
-    def parse_directions( howto_div )
-      result = []
-      howto_div.css("#ctl00_PlaceHolderMain_RecipePageControl_content p").each do |p|
-        result << p.text.strip
-      end
-      result
-    end
-
-    def parse_preparation_time( recipe_div )
-      recipe_div.css(".howto > p")[0].css("span").text.strip
-    end
-
-    def parse_cooking_time( recipe_div )
-      recipe_div.css(".howto > p")[1].css("span").text.strip
-    end
-
-    def parse_nutrition_table( nutpaper_div)
-      result = {}
-
-      rows = nutpaper_div.css("tr")
-      rows.slice(1..-1).each do |row|
-        cells = row.css("td")
-        result[ cells[0].text.strip ] = cells[1].text.strip
-      end
-
-      result
-    end
-
-    def go_to_collection_page(collection)
-      @agent.get(collection.css("a")[1].attr("href"))
-      @agent.page.parser
-    end
-
-    def find_recipes
-      @collection_page.css(".searchpaper .list > tr")
     end
     
     def save_recipe( recipe )

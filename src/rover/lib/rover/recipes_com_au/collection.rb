@@ -1,9 +1,12 @@
+require "rover/recipes_com_au"
+require "rover/recipes_com_au/recipe"
+
 require "mechanize"
 require "uri"
 
 module Rover::RecipesComAu
-  
   class Collection
+    
     attr_reader :collections,
                 :recipes,
                 :title,
@@ -42,10 +45,8 @@ module Rover::RecipesComAu
     end
   
     def parse_recipe_element( element )
-      {
-        :title => element.css("h4").text.strip,
-        :url => build_uri( element.css("a")[0].attr("href") )
-      }
+      Recipe.new( element.css("h4").text.strip,
+                  build_uri( element.css("a")[0].attr("href") ) )
     end
   
     def build_uri( path )
@@ -59,6 +60,6 @@ module Rover::RecipesComAu
                      @agent.page.uri.query,
                      @agent.page.uri.fragment )
     end
-  end
   
+  end
 end
