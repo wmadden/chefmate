@@ -1,1 +1,1 @@
-require "rover/scrapers/recipes_com_au"
+require "rover/recipes_com_au/scraper"

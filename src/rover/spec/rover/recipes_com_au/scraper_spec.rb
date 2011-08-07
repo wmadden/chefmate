@@ -1,71 +1,13 @@
 require "rover"
 
-describe( 'Rover::Scrapers::RecipesComAu' ) do
+describe( 'Rover::RecipesComAu::Scraper' ) do
   
   before( :each ) do
     Mechanize.stub!( :new ).and_return( agent )
   end
   
-  let(:scraper) { Rover::Scrapers::RecipesComAu.new }
+  let(:scraper) { Rover::RecipesComAu::Scraper.new }
   let(:agent) { stub(:mechanize_agent) }
-  
-  describe( '::Collection' ) do
-    let( :collection_url ) { "http://www.somewhere.com" }
-    let( :collection ) { Rover::Scrapers::RecipesComAu::Collection.new(collection_url) }
-    
-    describe( '#fetch' ) do
-      subject { collection.fetch }
-      
-      let( :collection_elements ) { [] }
-      let( :recipe_elements ) { [] }
-      
-      before( :each ) do
-        agent.stub_chain( :page, :parser, :css ).and_return( collection_elements, recipe_elements )
-        agent.stub( :get )
-      end
-      
-      it( 'should fetch the collection page' ) do
-        agent.should_receive( :get ).with( collection_url )
-        subject
-      end
-      
-      context( 'when the page contains collections' ) do
-        let( :element1 ) { stub(:collection_element1) }
-        let( :element2 ) { stub(:collection_element2) }
-        let( :collection_elements ) { [ element1, element2 ] }
-        
-        it( 'should parse each element' ) do
-          collection.should_receive(:parse_collection_element).with( element1 ).ordered
-          collection.should_receive(:parse_collection_element).with( element2 ).ordered
-          subject
-        end
-        
-        it( 'should assign the collections to @collections' ) do
-          collection.stub!(:parse_collection_element).and_return( :collection1, :collection2 )
-          subject
-          collection.collections.should == [ :collection1, :collection2 ]
-        end
-      end
-      
-      context( 'when the page contains recipes' ) do
-        let( :element1 ) { stub(:recipe_element1) }
-        let( :element2 ) { stub(:recipe_element2) }
-        let( :recipe_elements ) { [ element1, element2 ] }
-        
-        it( 'should parse each recipe' ) do
-          collection.should_receive(:parse_recipe_element).with(element1).ordered
-          collection.should_receive(:parse_recipe_element).with(element2).ordered
-          subject
-        end
-        
-        it( 'should assign the recipes to @recipes' ) do
-          collection.stub!(:parse_recipe_element).and_return( :recipe1, :recipe2 )
-          subject
-          collection.recipes.should == [ :recipe1, :recipe2 ]
-        end
-      end
-    end
-  end
   
   describe('#scrape') do
     subject { scraper.scrape }
@@ -90,7 +32,7 @@ describe( 'Rover::Scrapers::RecipesComAu' ) do
   
   describe( '#fetch_root' ) do
     it( 'should fetch the root of recipes.com.au' ) do
-      agent.should_receive( :get ).with( Rover::Scrapers::RecipesComAu::ROOT_URL )
+      agent.should_receive( :get ).with( Rover::RecipesComAu::Scraper::ROOT_URL )
       scraper.fetch_root
     end
   end
@@ -113,8 +55,8 @@ describe( 'Rover::Scrapers::RecipesComAu' ) do
     
     it( 'should create a Collection object targeting the root collections page' ) do
       new_collection = stub(:collection)
-      Rover::Scrapers::RecipesComAu::Collection.should_receive( :new )
-        .with( link.href )
+      Rover::RecipesComAu::Collection.should_receive( :new )
+        .with( '', link.href )
         .and_return( new_collection )
       subject.should == new_collection
     end
@@ -135,11 +77,19 @@ describe( 'Rover::Scrapers::RecipesComAu' ) do
     
     let( :recipes ) { [] }
     let( :collections ) { [] }
-    let( :collection ) { stub(:collection, :collections => collections, :recipes => recipes) }
+    let( :collection ) { stub(:collection,
+                              :collections => collections,
+                              :recipes => recipes,
+                              :fetch => nil ) }
+    
+    it( 'should fetch the collection' ) do
+      collection.should_receive(:fetch)
+      subject
+    end
     
     context( 'when the collection has collections' ) do
-      let( :collection1 ) { stub(:collection1, :collections => [], :recipes => [ :recipe1 ]) }
-      let( :collection2 ) { stub(:collection2, :collections => [], :recipes => [ :recipe2 ]) }
+      let( :collection1 ) { stub(:collection1, :collections => [], :recipes => [ :recipe1 ], :fetch => nil) }
+      let( :collection2 ) { stub(:collection2, :collections => [], :recipes => [ :recipe2 ], :fetch => nil) }
       
       before( :each ) do
         scraper.stub!( :parse_recipe ).and_return( :parsed_recipe )
