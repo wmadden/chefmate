@@ -45,6 +45,7 @@ module Rover::RecipesComAu
         recipes = []
         collection.collections.each do |subcollection|
           recipes += parse_collection( subcollection )
+          break
         end
         recipes
       elsif collection.recipes.length > 0
@@ -92,11 +93,6 @@ module Rover::RecipesComAu
       recipes[index]
     end
     
-    def save_recipe( recipe )
-      @db ||= Mongo::Connection.new.db("chefmate")
-      @collection ||= @db.collection("recipes")
-      @collection.insert(recipe)
-    end
   end
 
 end

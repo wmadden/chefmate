@@ -14,13 +14,14 @@ module Rover::RecipesComAu
               
     def initialize( title, url )
       @url = url
+      @title = title
       @agent = Mechanize.new
       @collections = []
       @recipes = []
     end
   
-    def fetch()
-      puts "Fetching #{@url}..."
+    def fetch
+      puts "Fetching collection #{@title}..."
       @agent.get( @url )
     
       collections = @agent.page.parser.css(".groupbox")
@@ -49,13 +50,14 @@ module Rover::RecipesComAu
                   build_uri( element.css("a")[0].attr("href") ) )
     end
   
-    def build_uri( path )
+    def build_uri( uri_string )
+      uri = URI.parse( uri_string )
       URI::HTTP.new( @agent.page.uri.scheme,
                      @agent.page.uri.userinfo,
                      @agent.page.uri.host,
                      @agent.page.uri.port,
                      @agent.page.uri.registry,
-                     path,
+                     uri.path,
                      @agent.page.uri.opaque,
                      @agent.page.uri.query,
                      @agent.page.uri.fragment )

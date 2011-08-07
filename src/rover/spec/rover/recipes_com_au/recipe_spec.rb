@@ -42,12 +42,13 @@ describe(Rover::RecipesComAu::Recipe) do
       recipe.stub!( :parse_directions )
       recipe.stub!( :parse_times )
       recipe.stub!( :parse_nutrition_table )
-      recipe.stub!( :parse_serving_info )
     end
     
-    it( 'should set the parser version' ) do
+    it( 'should set the parser info' ) do
+      Time.stub!( :now ).and_return(:now)
       subject
       recipe.data[:parser][:version].should == Rover::RecipesComAu::PARSER_VERSION
+      recipe.data[:parser][:parsed_at].should == :now
     end
     
     it( 'should set the source' ) do
@@ -78,11 +79,6 @@ describe(Rover::RecipesComAu::Recipe) do
     
     it( 'should parse the nutrition table' ) do
       recipe.should_receive( :parse_nutrition_table )
-      subject
-    end
-    
-    it( 'should parse the serving info' ) do
-      recipe.should_receive( :parse_serving_info )
       subject
     end
     
