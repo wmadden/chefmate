@@ -1,12 +1,13 @@
 require "mechanize"
 require "uri"
 
-module Rover
-module RecipesComAu
+module Rover::RecipesComAu
   
   class Collection
     attr_reader :collections,
-                :recipes
+                :recipes,
+                :title,
+                :url
               
     def initialize( title, url )
       @url = url
@@ -60,5 +61,4 @@ module RecipesComAu
     end
   end
   
-end
 end

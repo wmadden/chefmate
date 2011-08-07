@@ -1,15 +1,17 @@
 require "pp"
 require "mechanize"
 require "uri"
+
+require "rover/recipes_com_au"
 require "rover/recipes_com_au/collection"
 
-module Rover
-module RecipesComAu
+module Rover::RecipesComAu
   
   class Scraper
     attr_reader :root_collection,
                 :agent
     
+    PARSER_VERSION = [1,0,0]
     ROOT_URL = 'http://recipes.com.au/'
     
     def collections
@@ -24,26 +26,6 @@ module RecipesComAu
       @root_collection = get_root_collection
       
       parse_collection( @root_collection )
-      # go_to_collections_page
-      #       
-      #       collections = find_collections
-      #       
-      #       while collections.length > 0
-      #         collection = prompt_for_collection(collections)
-      #         @collection_page = go_to_collection_page(collection)
-      #         collections = find_collections
-      #       end
-      #       
-      #       while true
-      #         recipe = prompt_for_recipe
-      #         
-      #         go_to_recipe(recipe)
-      #         
-      #         recipe = parse_recipe
-      #         pp recipe
-      #         
-      #         save_recipe( recipe )
-      #       end
     end
     
     def fetch_root
@@ -195,5 +177,4 @@ module RecipesComAu
     end
   end
 
-end
 end
