@@ -38,6 +38,7 @@ describe(Rover::RecipesComAu::Recipe) do
     subject { recipe.parse }
     
     before( :each ) do
+      recipe.stub!( :parse_serves )
       recipe.stub!( :parse_ingredients )
       recipe.stub!( :parse_directions )
       recipe.stub!( :parse_times )
@@ -54,12 +55,17 @@ describe(Rover::RecipesComAu::Recipe) do
     it( 'should set the source' ) do
       subject
       recipe.data[:source][:url].should == recipe_url
-      recipe.data[:source][:site].should == :'recipes.com.au'
+      recipe.data[:source][:site].should == 'recipes.com.au'
     end
     
     it( 'should set the title' ) do
       subject
       recipe.data[:title] == recipe_title
+    end
+    
+    it( 'should parse the serving info' ) do
+      recipe.should_receive( :parse_serves )
+      subject
     end
     
     it( 'should parse the ingredients list' ) do

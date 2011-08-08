@@ -30,16 +30,27 @@ module Rover::RecipesComAu
       
       @data[:source] = {
         :url => @url.to_s,
-        :site => :'recipes.com.au'
+        :site => 'recipes.com.au'
       }
       
       @data[:title] = @title
-      @data[:serves] = @agent.page.parser.css(".maincopy .ingredients").css(".serves").text.strip
       
+      parse_serves
       parse_ingredients
       parse_directions
       parse_times
       parse_nutrition_table
+    end
+    
+    def parse_serves
+      serves_string = @agent.page.parser.css(".maincopy .ingredients").css(".serves").text.strip
+      
+      match = serves_string.match( /\([^0-9]*(\d+)\)/ )
+      if !match
+        raise "Can't parse servings: #{serves_string}"
+      end
+      
+      @data[:serves] = match[1]
     end
     
     def parse_ingredients
@@ -47,7 +58,23 @@ module Rover::RecipesComAu
       
       @data[:ingredients] = []
       ul.css("li").each do |li|
-        @data[:ingredients] << li.text.strip
+        ingredient_string = li.text.strip
+        
+        if match = ingredient_string.match( /([\d,\/]+) ?(#{UNITS.join('|')})? (?:of )?(.*)/ )
+          ingredient = {
+            :item => match[3]
+          }
+          
+          if match[1] || match[2]
+            ingredient[:amount] = {}
+            ingredient[:amount][:quantity] = match[1] if match[1]
+            ingredient[:amount][:unit] = match[2]     if match[2]
+          end
+          
+          @data[:ingredients] << ingredient
+        else
+          @data[:ingredients] << ingredient_string
+        # end
       end
     end
     
@@ -56,7 +83,13 @@ module Rover::RecipesComAu
       
       @data[:directions] = []
       howto_div.css("#ctl00_PlaceHolderMain_RecipePageControl_content p").each do |p|
-        @data[:directions] << p.text.strip
+        direction_string = p.text.strip
+        
+        if match = direction_string.match( /\d+\.\s*(.*)/ )
+          @data[:directions] << match[1]
+        else
+          @data[:directions] << direction_string
+        end
       end
     end
     
@@ -79,5 +112,17 @@ module Rover::RecipesComAu
       end
     end
     
+    UNITS = [
+      'tsp', 'tsps', 'teaspoon', 'teaspoons',
+      'tbsp', 'tbsps', 'tablespoon', 'tablespoons',
+      'cup', 'cups',
+      'g', 'gram', 'grams', 'kg', 'kilo', 'kilos', 'kilogram', 'kilograms',
+      'lb', 'pound', 'pounds', 'oz', 'ounce', 'ounces',
+      'L', 'litre', 'litres',
+      'mL', 'mil', 'mils', 'millilitres',
+      'pkt', 'pkts', 'packet', 'packets',
+      'slice', 'slices',
+      'rasher', 'rashers',
+      ]
   end
 end
